@@ -1,6 +1,6 @@
-# Project Idea: KiranaConnect
+# Project Idea: Kirana
 
-**KiranaConnect** is a comprehensive Full Stack Application designed to modernize local Kirana stores by providing a robust digital platform for inventory management and online customer ordering. It bridges the gap between traditional local grocery stores and modern e-commerce convenience.
+**Kirana** is a comprehensive Full Stack Application designed to modernize local Kirana stores by providing a robust digital platform for inventory management and online customer ordering. It bridges the gap between traditional local grocery stores and modern e-commerce convenience.
 
 ## Scope
 The application will serve two primary types of users: **Store Administrators (Owners)** and **Customers**.

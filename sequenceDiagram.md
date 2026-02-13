@@ -1,4 +1,4 @@
-# KiranaConnect Sequence Diagram (Order Flow)
+# Kirana Sequence Diagram (Order Flow)
 
 ```mermaid
 sequenceDiagram

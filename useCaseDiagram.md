@@ -1,11 +1,11 @@
-# KiranaConnect Use Case Diagram
+# Kirana Use Case Diagram
 
 ```mermaid
 usecaseDiagram
     actor Customer as "Customer"
     actor Admin as "Store Admin"
 
-    package "KiranaConnect System" {
+    package "Kirana System" {
         usecase "Register / Login" as UC1
         usecase "Browse Products" as UC2
         usecase "Search Requirements" as UC3

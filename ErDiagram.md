@@ -1,4 +1,4 @@
-# KiranaConnect ER Diagram
+# Kirana ER Diagram
 
 ```mermaid
 erDiagram

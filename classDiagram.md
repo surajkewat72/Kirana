@@ -1,4 +1,4 @@
-# KiranaConnect Class Diagram
+# Kirana Class Diagram
 
 ```mermaid
 classDiagram
