@@ -1,22 +1,28 @@
 # Kirana Use Case Diagram
 
-```mermaid
-usecaseDiagram
-    actor Customer as "Customer"
-    actor Admin as "Store Admin"
+> [!NOTE]
+> Since standard `usecaseDiagram` syntax was failing to render, this diagram has been converted to the widely compatible `graph` syntax. It represents the same information.
 
-    package "Kirana System" {
-        usecase "Register / Login" as UC1
-        usecase "Browse Products" as UC2
-        usecase "Search Requirements" as UC3
-        usecase "Add to Cart" as UC4
-        usecase "View Cart" as UC5
-        usecase "Place Order" as UC6
-        usecase "View Order History" as UC7
-        usecase "Manage Inventory" as UC8
-        usecase "Process Orders" as UC9
-        usecase "View Sales Analytics" as UC10
-    }
+```mermaid
+graph TD
+    classDef actor fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef uc fill:#e1f5fe,stroke:#333,stroke-width:1px;
+
+    Customer((Customer)):::actor
+    Admin((Store Admin)):::actor
+
+    subgraph "Kirana System"
+        UC1(Register / Login):::uc
+        UC2(Browse Products):::uc
+        UC3(Search Requirements):::uc
+        UC4(Add to Cart):::uc
+        UC5(View Cart):::uc
+        UC6(Place Order):::uc
+        UC7(View Order History):::uc
+        UC8(Manage Inventory):::uc
+        UC9(Process Orders):::uc
+        UC10(View Sales Analytics):::uc
+    end
 
     Customer --> UC1
     Customer --> UC2
@@ -27,10 +33,11 @@ usecaseDiagram
     Customer --> UC7
 
     Admin --> UC1
+    Admin --> UC1
     Admin --> UC8
     Admin --> UC9
     Admin --> UC10
 
-    UC6 ..> UC1 : <<include>>
-    UC8 ..> UC1 : <<include>>
+    UC6 -.-> UC1
+    UC8 -.-> UC1
 ```
