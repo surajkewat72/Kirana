@@ -18,7 +18,15 @@ export class OrderController {
     public async placeOrder(req: Request, res: Response): Promise<void> {
         try {
             const { cartItems, paymentMethod } = req.body;
-            const customerData = req.user; // Mock user middleware
+            
+            // In a real app, this would come from an Auth middleware
+            // Casting to 'any' for the architectural demonstration
+            const customerData = (req as any).user || { 
+                id: 'mock-id', 
+                name: 'Guest User', 
+                email: 'guest@example.com' 
+            };
+            
             const customer = new Customer(customerData);
 
             // 1. Setup Strategy (Polymorphism)

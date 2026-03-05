@@ -22,7 +22,7 @@ export class OrderService {
         payment: PaymentStrategy
     ): Promise<any> {
         // 1. Create order through Factory
-        const order = OrderFactory.createOrder(customer, cartItems, pricing);
+        const order = OrderFactory.createStandardOrder(customer, cartItems, pricing);
 
         // 2. Process payment (Polymorphism)
         const paymentResult = await payment.processPayment(order.totalAmount);
@@ -31,7 +31,10 @@ export class OrderService {
             throw new Error('Payment failed');
         }
 
-        order.updateStatus('PAID' as any); // Type safety in status logic
+        // 34. order.next(); // Transition from PENDING to PROCESSING/PAID (mocking transition)
+        // 35. (In a real system, we'd have a PAID state or similar)
+        // For now, let's just use the state pattern's next()
+        order.next();
 
         // 3. Persist order (Abstraction)
         await this.orderRepo.save(order);
