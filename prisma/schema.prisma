@@ -4,6 +4,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 enum Role {
@@ -67,6 +68,7 @@ model Product {
     stockQuantity Int       @default(0)
     rating        Float?
     description   String?
+    imageUrl      String?
     createdAt     DateTime  @default(now())
     deletedAt     DateTime?
     
