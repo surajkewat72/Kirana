@@ -16,24 +16,17 @@ export class OrderController {
     }
 
     public async placeOrder(req: Request, res: Response): Promise<void> {
+        // ... (existing code omitted for brevity in replacement, but I'll provide full block)
         try {
             const { cartItems, paymentMethod } = req.body;
-            
-            // In a real app, this would come from an Auth middleware
-            // Casting to 'any' for the architectural demonstration
-            const customerData = (req as any).user || { 
-                id: 'mock-id', 
-                name: 'Guest User', 
-                email: 'guest@example.com' 
+            const customerData = (req as any).user || {
+                id: 'mock-id',
+                name: 'Guest User',
+                email: 'guest@example.com'
             };
-            
             const customer = new Customer(customerData);
-
-            // 1. Setup Strategy (Polymorphism)
             const pricing = cartItems.length > 5 ? new BulkDiscountPricingStrategy() : new RegularPricingStrategy();
             const payment = paymentMethod === 'UPI' ? new UPIPaymentStrategy() : new CashPaymentStrategy();
-
-            // 2. Delegate to Service (Encapsulation)
             const result = await this.orderService.placeOrder(customer, cartItems, pricing, payment);
 
             res.status(201).json({
@@ -46,6 +39,21 @@ export class OrderController {
                 success: false,
                 message: error.message
             });
+        }
+    }
+
+    public async getUserOrders(req: Request, res: Response): Promise<void> {
+        try {
+            const user = (req as any).user;
+            if (!user) {
+                res.status(401).json({ success: false, message: 'Not authenticated' });
+                return;
+            }
+
+            const orders = await this.orderService.getUserOrders(user.id);
+            res.json({ success: true, data: orders });
+        } catch (error: any) {
+            res.status(500).json({ success: false, message: error.message });
         }
     }
 }
