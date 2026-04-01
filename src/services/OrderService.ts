@@ -16,8 +16,8 @@ export class OrderService {
     }
 
     public async placeOrder(
-        customer: Customer, 
-        cartItems: any[], 
+        customer: Customer,
+        cartItems: any[],
         pricing: PricingStrategy,
         payment: PaymentStrategy
     ): Promise<any> {
@@ -26,7 +26,7 @@ export class OrderService {
 
         // 2. Process payment (Polymorphism)
         const paymentResult = await payment.processPayment(order.totalAmount);
-        
+
         if (!paymentResult) {
             throw new Error('Payment failed');
         }
@@ -40,5 +40,9 @@ export class OrderService {
         await this.orderRepo.save(order);
 
         return order;
+    }
+
+    public async getUserOrders(userId: string): Promise<any[]> {
+        return await this.orderRepo.findByUserId(userId);
     }
 }
