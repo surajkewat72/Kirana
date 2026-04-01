@@ -12,5 +12,6 @@ const orderController = new OrderController(orderService);
 router.use(authMiddleware);
 
 router.post('/', (req, res) => orderController.placeOrder(req, res));
+router.get('/', (req, res) => orderController.getUserOrders(req, res));
 
 export default router;
