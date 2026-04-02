@@ -39,4 +39,13 @@ export class AdminController {
             res.status(400).json({ success: false, message: error.message });
         }
     }
+
+    async getUsers(req: Request, res: Response): Promise<void> {
+        try {
+            const users = await this.adminService.getAllUsers();
+            res.json({ success: true, data: users });
+        } catch (error: any) {
+            res.status(500).json({ success: false, message: error.message });
+        }
+    }
 }

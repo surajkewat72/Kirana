@@ -13,6 +13,7 @@ router.use(authMiddleware);
 router.use(roleMiddleware(['ADMIN']));
 
 router.get('/stats', (req, res) => adminController.getStats(req, res));
+router.get('/users', (req, res) => adminController.getUsers(req, res));
 router.post('/products', (req, res) => adminController.addProduct(req, res));
 router.patch('/products/:id/restock', (req, res) => adminController.restockProduct(req, res));
 

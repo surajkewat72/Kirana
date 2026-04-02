@@ -24,7 +24,15 @@ export class AdminService {
         return prisma.order.findMany({
             take: 10,
             orderBy: { orderedAt: 'desc' },
-            include: { user: { select: { name: true, email: true } } }
+            include: { user: { select: { id: true, name: true, email: true } } }
+        });
+    }
+
+    async getAllUsers(): Promise<any[]> {
+        return prisma.user.findMany({
+            where: { deletedAt: null },
+            select: { id: true, name: true, email: true, role: true, phone: true, address: true, createdAt: true },
+            orderBy: { createdAt: 'desc' }
         });
     }
 }
