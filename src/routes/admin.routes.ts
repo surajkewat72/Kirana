@@ -2,15 +2,15 @@ import { Router } from 'express';
 import { AdminController } from '../controllers/AdminController';
 import { AdminService } from '../services/AdminService';
 import { ProductService } from '../services/ProductService';
-import { authMiddleware, roleMiddleware } from '../middleware/auth.middleware';
+import { authenticate, authorize } from '../middlewares/auth.middleware';
 
 const router = Router();
 const adminService = new AdminService();
 const productService = new ProductService();
 const adminController = new AdminController(adminService, productService);
 
-router.use(authMiddleware);
-router.use(roleMiddleware(['ADMIN']));
+router.use(authenticate);
+router.use(authorize('ADMIN'));
 
 router.get('/stats', (req, res) => adminController.getStats(req, res));
 router.get('/users', (req, res) => adminController.getUsers(req, res));
