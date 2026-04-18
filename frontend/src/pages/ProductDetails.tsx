@@ -83,9 +83,9 @@ const ProductDetails: React.FC = () => {
                     animate={{ opacity: 1, x: 0 }}
                 >
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--primary)', fontWeight: 600, marginBottom: '12px' }}>
-                        <span style={{ textTransform: 'uppercase', fontSize: '0.85rem', tracking: '0.05em' }}>{product.category?.name}</span>
+                        <span style={{ textTransform: 'uppercase', fontSize: '0.85rem', letterSpacing: '0.05em' }}>{product.category?.name}</span>
                         <span style={{ color: '#cbd5e1' }}>•</span>
-                        <span style={{ textTransform: 'uppercase', fontSize: '0.85rem', tracking: '0.05em' }}>{product.brand}</span>
+                        <span style={{ textTransform: 'uppercase', fontSize: '0.85rem', letterSpacing: '0.05em' }}>{product.brand}</span>
                     </div>
 
                     <h1 style={{ fontSize: '2.8rem', fontWeight: 800, marginBottom: '16px', lineHeight: 1.1 }}>{product.name}</h1>
