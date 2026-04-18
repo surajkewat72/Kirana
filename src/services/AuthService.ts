@@ -6,6 +6,15 @@ export class AuthService {
     private readonly jwtSecret = process.env.JWT_SECRET || 'super-secret-key';
 
     async register(data: any): Promise<any> {
+        // Check if email already exists
+        const existingUser = await prisma.user.findUnique({
+            where: { email: data.email }
+        });
+        
+        if (existingUser) {
+            throw new Error('Email is already registered. Please login or use a different email.');
+        }
+
         const passwordHash = await bcrypt.hash(data.password, 10);
         
         const user = await prisma.user.create({
