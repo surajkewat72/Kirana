@@ -10,7 +10,14 @@ export class PrismaService {
 
     public static getInstance(): PrismaClient {
         if (!PrismaService.instance) {
-            PrismaService.instance = new PrismaClient();
+            PrismaService.instance = new PrismaClient({
+                log: ['error', 'warn'],
+            });
+            
+            // Log successful connection
+            PrismaService.instance.$connect()
+                .then(() => console.log('✅ Prisma connected to Database Successfully'))
+                .catch((err) => console.error('❌ Prisma Connection Error:', err.message));
         }
         return PrismaService.instance;
     }

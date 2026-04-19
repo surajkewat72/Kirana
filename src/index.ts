@@ -13,17 +13,44 @@ const PORT = process.env.PORT || 3000;
 
 // Security and utility middleware
 app.use(helmet());
+
+// Improved CORS with exact origin matching and Vercel wildcard support
 app.use(cors({
-    origin: process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',') : '*',
-    credentials: true
+    origin: (origin, callback) => {
+        const allowedOrigins = process.env.ALLOWED_ORIGINS 
+            ? process.env.ALLOWED_ORIGINS.split(',').map(o => o.trim().replace(/\/$/, ''))
+            : [];
+        
+        const isVercel = origin && (origin.endsWith('.vercel.app') || origin.includes('vercel.app'));
+        const isAllowed = !origin || allowedOrigins.includes(origin.replace(/\/$/, '')) || allowedOrigins.length === 0 || isVercel;
+
+        if (isAllowed) {
+            callback(null, true);
+        } else {
+            console.warn(`[CORS Blocked] Origin: \${origin} is not in ALLOWED_ORIGINS (\${allowedOrigins.join(', ')}) and is not a Vercel domain.`);
+            callback(new Error('Not allowed by CORS'));
+        }
+    }
 }));
+
 app.use(morgan('dev'));
 app.use(express.json());
+
+// Request logger for Render console
+app.use((req, res, next) => {
+    console.log(`[Request] \${new Date().toISOString()} - \${req.method} \${req.url} - Origin: \${req.get('origin') || 'None'}`);
+    next();
+});
 
 // Main API routes
 app.use('/api/v1', routes);
 
-// Health check
+// Simple Server Health Check (No DB)
+app.get('/ping', (req, res) => {
+    res.send('pong');
+});
+
+// Health check with DB status
 app.get('/health', (req: Request, res: Response) => {
     res.json({ status: 'UP', timestamp: new Date() });
 });
@@ -48,7 +75,9 @@ if (process.env.NODE_ENV === 'production') {
 
 // Centralized Error Handling
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-    console.error(`[Error] ${err.stack}`);
+    console.error(`[Error] \${req.method} \${req.url} - \${err.message}`);
+    if (err.stack) console.error(err.stack);
+    
     res.status(err.status || 500).json({
         success: false,
         message: err.message || 'Internal Server Error',
