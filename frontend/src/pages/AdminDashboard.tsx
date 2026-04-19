@@ -131,7 +131,9 @@ const AdminDashboard: React.FC = () => {
                             <div style={{ padding: '24px', borderBottom: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                 <span style={{ fontSize: '1.2rem', fontWeight: 800 }}>Customer Directory</span>
                                 <div style={{ position: 'relative' }}>
-                                    <Search size={18} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#94a3b8' }} />
+                                    <span style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', display: 'flex' }}>
+                                        <Search size={18} color="#94a3b8" />
+                                    </span>
                                     <input 
                                         type="text" 
                                         placeholder="Search customers..." 

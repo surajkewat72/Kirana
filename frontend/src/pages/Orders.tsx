@@ -33,7 +33,9 @@ const Orders: React.FC = () => {
             
             {orders.length === 0 ? (
                 <div className="glass-card" style={{ padding: '60px', textAlign: 'center' }}>
-                    <Package size={64} style={{ color: '#cbd5e1', marginBottom: '16px' }} />
+                    <span style={{ color: '#cbd5e1', marginBottom: '16px', display: 'flex', justifyContent: 'center' }}>
+                        <Package size={64} />
+                    </span>
                     <h2 style={{ fontSize: '1.5rem', fontWeight: 600 }}>No orders yet</h2>
                     <p style={{ color: '#64748b', marginTop: '8px' }}>Start shopping to see your orders here!</p>
                 </div>

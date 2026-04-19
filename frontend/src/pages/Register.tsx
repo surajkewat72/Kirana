@@ -74,14 +74,18 @@ const Register: React.FC = () => {
                         <div className="form-group" style={{ marginBottom: 0 }}>
                             <label className="label" style={{ fontSize: '0.85rem' }}>Full Name</label>
                             <div style={{ position: 'relative' }}>
-                                <UserIcon size={18} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#94a3b8' }} />
+                                <span style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', display: 'flex' }}>
+                                    <UserIcon size={18} color="#94a3b8" />
+                                </span>
                                 <input name="name" type="text" className="input" style={{ paddingLeft: '40px' }} placeholder="John Doe" onChange={handleChange} required />
                             </div>
                         </div>
                         <div className="form-group" style={{ marginBottom: 0 }}>
                             <label className="label" style={{ fontSize: '0.85rem' }}>Phone</label>
                             <div style={{ position: 'relative' }}>
-                                <Phone size={18} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#94a3b8' }} />
+                                <span style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', display: 'flex' }}>
+                                    <Phone size={18} color="#94a3b8" />
+                                </span>
                                 <input name="phone" type="tel" className="input" style={{ paddingLeft: '40px' }} placeholder="9876543210" onChange={handleChange} />
                             </div>
                         </div>
@@ -90,7 +94,9 @@ const Register: React.FC = () => {
                     <div className="form-group">
                         <label className="label" style={{ fontSize: '0.85rem' }}>Email Address</label>
                         <div style={{ position: 'relative' }}>
-                            <Mail size={18} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#94a3b8' }} />
+                            <span style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', display: 'flex' }}>
+                                <Mail size={18} color="#94a3b8" />
+                            </span>
                             <input name="email" type="email" className="input" style={{ paddingLeft: '40px' }} placeholder="name@example.com" onChange={handleChange} required />
                         </div>
                     </div>
@@ -98,7 +104,9 @@ const Register: React.FC = () => {
                     <div className="form-group">
                         <label className="label" style={{ fontSize: '0.85rem' }}>Password</label>
                         <div style={{ position: 'relative' }}>
-                            <Lock size={18} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#94a3b8' }} />
+                            <span style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', display: 'flex' }}>
+                                <Lock size={18} color="#94a3b8" />
+                            </span>
                             <input name="password" type="password" className="input" style={{ paddingLeft: '40px' }} placeholder="••••••••" onChange={handleChange} required />
                         </div>
                     </div>
@@ -106,7 +114,9 @@ const Register: React.FC = () => {
                     <div className="form-group">
                         <label className="label" style={{ fontSize: '0.85rem' }}>Address (Optional)</label>
                         <div style={{ position: 'relative' }}>
-                            <MapPin size={18} style={{ position: 'absolute', left: '12px', top: '14px', color: '#94a3b8' }} />
+                            <span style={{ position: 'absolute', left: '12px', top: '14px', display: 'flex' }}>
+                                <MapPin size={18} color="#94a3b8" />
+                            </span>
                             <textarea name="address" className="input" style={{ paddingLeft: '40px', minHeight: '80px', resize: 'none' }} placeholder="Enter your delivery address" onChange={handleChange} />
                         </div>
                     </div>

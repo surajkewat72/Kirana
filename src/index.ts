@@ -4,6 +4,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
 import routes from './routes';
+import path from 'path';
 
 dotenv.config();
 
@@ -23,6 +24,20 @@ app.use('/api/v1', routes);
 app.get('/health', (req: Request, res: Response) => {
     res.json({ status: 'UP', timestamp: new Date() });
 });
+
+// Serve frontend static files in production
+if (process.env.NODE_ENV === 'production') {
+    const frontendPath = path.join(__dirname, '../frontend/dist');
+    app.use(express.static(frontendPath));
+    
+    // Handle SPA routing
+    app.get('*', (req: Request, res: Response) => {
+        // Skip API routes
+        if (!req.path.startsWith('/api/')) {
+            res.sendFile(path.join(frontendPath, 'index.html'));
+        }
+    });
+}
 
 // Centralized Error Handling
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {

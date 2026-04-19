@@ -36,10 +36,9 @@ const Home: React.FC = () => {
                 </div>
                 
                 <div style={{ position: 'relative', width: '300px' }}>
-                    <Search 
-                        size={20} 
-                        style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#999' }} 
-                    />
+                    <span style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', display: 'flex' }}>
+                        <Search size={20} color="#999" />
+                    </span>
                     <input 
                         type="text" 
                         placeholder="Search products..." 

@@ -34,7 +34,8 @@ export class ProductService {
                 salePrice: data.salePrice,
                 marketPrice: data.marketPrice,
                 stockQuantity: data.stockQuantity,
-                description: data.description
+                description: data.description,
+                imageUrl: data.imageUrl
             }
         });
     }
