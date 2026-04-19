@@ -13,7 +13,10 @@ const PORT = process.env.PORT || 3000;
 
 // Security and utility middleware
 app.use(helmet());
-app.use(cors());
+app.use(cors({
+    origin: process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',') : '*',
+    credentials: true
+}));
 app.use(morgan('dev'));
 app.use(express.json());
 
@@ -25,18 +28,22 @@ app.get('/health', (req: Request, res: Response) => {
     res.json({ status: 'UP', timestamp: new Date() });
 });
 
-// Serve frontend static files in production
+// Serve frontend static files in production (only if dist exists)
 if (process.env.NODE_ENV === 'production') {
     const frontendPath = path.join(__dirname, '../frontend/dist');
-    app.use(express.static(frontendPath));
     
-    // Handle SPA routing
-    app.get('*', (req: Request, res: Response) => {
-        // Skip API routes
-        if (!req.path.startsWith('/api/')) {
-            res.sendFile(path.join(frontendPath, 'index.html'));
-        }
-    });
+    // Check if directory exists to avoid errors on split deployment
+    const fs = require('fs');
+    if (fs.existsSync(frontendPath)) {
+        app.use(express.static(frontendPath));
+        
+        // Handle SPA routing
+        app.get('*', (req: Request, res: Response) => {
+            if (!req.path.startsWith('/api/')) {
+                res.sendFile(path.join(frontendPath, 'index.html'));
+            }
+        });
+    }
 }
 
 // Centralized Error Handling
